@@ -1,0 +1,343 @@
+git push -f origin master (force push, never do, bad practice)
+git remote add origin https://github.com/manishsng/portfolio.git 
+git config --global user.email manish.bk07@gmail.com
+git config --global user.name "Manish Singh"
+git config --global core.editor "'C:\Program Files\Microsoft VS Code\code.exe' -w"
+git config --global -e (opens gitconfig file)
+git ls-files(list files that git is tracking)
+
+
+git branch -a (list all local and remote branches)
+git branch newbranch (creates newbranch)   
+git checkout -b 'name of brach' (creates a branch and checks it out)
+git branch -m oldbranchname newbranchname
+
+
+git merge branchname -m "merging message"(while being at master) (merges the branch into master) (sometime merge conflict sometime fast forwarded merge(no commits made to the master))
+git merge branchname --no-ff (no faster forward merge, graphline stays preserved )
+git branch -d branchname (delete a branch, you need to be in diffrent branch before deleting branch ) (merge branch no longer required)
+
+git checkout -- <filename> undo uncommited changes 
+git revert (undo commited changes) 
+git log (previous commit changes ) q to exit
+git log --since="3 days ago"
+git log -- filename(history of specific file)
+git log --follow -- pathtofile/filename (show log of a file under a folder)
+git show (commitid) 
+
+
+git pull origin master (best practice is to pull changes before pushing)
+code ~/.gitconfig(configurations file)
+git commit -am "message"(add and commit at once)(express commit)
+git reset HEAD filename (unstage file) (last commit on the current branch)
+git reset HEAD^1(reset to previous commit)
+git reset commitid
+git reflog (everthing we have done)
+
+git checkout -- filename.extention (original state of the file same as the last commit)(to undo deletion )
+
+mv oldfilename.txt newfilename.txt (without using git command)
+git will see this as two operations 
+git add -A (add all files recursively)
+
+git rm (bash command) (changes to be tracked)
+rm (cmd command ) (removed forever)
+
+git config --global alias.smartlog "log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)<%H>%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)<%ae>%Creset%n%C(cyan)%s%n%Creset'"
+git smartlog (execute the alias)
+
+git alias (to check existing alias)(also stores in gitconfig file )
+git config --global --unset alias.smartlog(delete an alias)
+
+git show commitID (Shows info about specific commit)
+
+
+.gitignore (one file per line)
+manish.txt(specific filename)
+*.ext (pattern, anyfile that ends with .ext)
+Foldername/ (excludes folder)
+
+
+
+
+git diff 
+git add . 
+git commit -m "nmentions"
+git commit --amend (amend commit message)
+git push origin master
+echo "test git quick start" >> start.txt
+cat start.txt
+git mv old_filename new_filename (rename file) 
+
+
+
+aliasing
+
+
+
+
+code .  Open VScode form the terminal
+code filename (Create file, Opens it for editing)
+https://code.visualstudio.com/docs/getstarted/tips-and-tricks   (vscode tricks)
+
+
+git config --global merge.tool p4merge
+
+git config --global mergetool.p4merge.path "C:/Program Files/Perforce/p4merge.exe"
+git config --global mergetool.prompt false 
+
+
+git config --global diff.tool p4merge
+
+git config --global difftool.p4merge.path "C:/Program Files/Perforce/p4merge.exe"
+git config --global difftool.prompt false
+
+git config --global --list 
+git config --global -e(gitconfig file)
+
+
+ git diff (difference between working director, stagin area) 
+ git diff HEAD   (difference between working director, git local repo)
+ git diff --stages HEAD  (difference between staging, git local repo)
+
+just add difftool instead of diff to open p4merge
+
+
+
+
+
+p4merge for visual difftool and mergetool (down from perforce website)
+
+add these lines to gitconfig file after installing p4merge
+[merge]
+	tool = p4merge
+[mergetool "p4merge"]
+	path = C:/Program Files/Perforce/p4merge.exe
+[mergetool]
+	prompt = false
+[diff]
+	tool = p4merge
+[difftool "p4merge"]
+	path = C:/Program Files/Perforce/p4merge.exe
+[difftool]
+	prompt = false
+
+difftool take all the argument diff can take
+
+
+
+
+
+just add difftool instead of diff to open p4merge
+
+git difftool (difference between working director, stagin area) 
+git difftool HEAD   (difference between working director, git local repo)
+git difftool --stages HEAD  (difference between staging, git local repo)
+git difftool master origin/master(local repo vs github repo )
+
+git difftool -- filename (when you want diff for specific file)
+git difftool HEAD HEAD^ (compares Head and HEad -1 )
+git difftool commitID HEAD (compares specific commit to HEAD)
+git difftool commitID commitiD (compares specific commit to another commit) 
+git difftool master origin/master(local repo vs github repo )
+git difftool master otherbranch (compares two branched)
+
+
+git mergetool (to resolve merge conflicts)
+
+
+git merge branchname (merge without message)
+git merge branchname -m "merging message"(while being at master) (merges the branch into master) (sometime merge conflict sometime fast forwarded merge(no commits made to the master))
+git merge branchname --no-ff (no faster forward merge, graphline stays preserved )
+git branch -d branchname (delete a branch, you need to be in diffrent branch before deleting branch ) (merge branch no longer required)
+
+commit after merging the conflicts
+add all .orig file to gitignore( .org file contains the merge conflicts incase you want to revert back anything, it doesn't need to be tracked)
+
+
+rebase (to incorporate change of master branch in our branch )
+( while being at feature branch) 
+git rebase master (rewind features on our branch playback master, then apply the changes that happened on mybranch )(can do fast forward merge after rebasing )
+git mergetool (to resolve any conflicts while rebasing)
+git rebase --continue (to continue rebasing after resolve merge conflicts)
+git rebase --abort (when rebase can't happen due to conflicts) 
+git merge branchname (fast forward merge will happen)
+
+crtl +w to exit p4merge
+
+
+git fetch origin master (non destructively command, updates the refrences b/w remote repo and local repo)
+git pull --rebase origin master 
+
+
+
+git stash (stash some changes that are working in progress and you don't want to commit that)
+git stash -u (stashes untracked files by git too)
+git stash save "stash message to diffentiates stashes"
+
+git stash apply 
+git stash list (shows the list of stashes)
+git stash drop (drops the last stash )
+git stash pop (apply and drops the stash)
+
+working with multiple stashes (last stash is index 0 )
+git stash show stash@{stashindex}
+git stash apply stash@{stashindex}
+git stash drop stash@{stashindex}
+
+git stash clear (drop all pending stashes)
+
+
+git stash -u
+git stash branch newbranchname (create new branch, apply stashes to the new branch then drops it )
+do some changes in the branch then merge it ot master
+(work in master, stash the changes, apply the changes to another branch)
+
+tags are label that we can apply to any commit in history, it shows in git log, it is used to denotes major milestones or version numbers
+git tag newtag (adds new Tag to HEAD)(you can see that in git log)
+
+git tag --list  (list all the used tags)
+git tag --delete newtag (newtag deleted)
+git tag -a v-1.0(tag message,date, name is incorporated incorporated) (it is annotated tag )
+git tag  v-1.0 -m "tag message"
+git diff tag1 tag2(differeces between tag1 and tag2)
+git tag -a betaversion commitID (apply tag to previous commit)
+git tag -a betaversion -f commitID (update commit tag )
+(Go to release tab in github this is how github tracks tags)
+git push origin tagname (to push a particular tag) 
+git push origin master --tags (push all the tags)
+git push origin :tagname  delete a tag (push nothing to this tag name)
+
+
+
+
+integrate git bash with vs code    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+paster this line in settings feature terminal intergrated shell windows
+
+
+
+issues could be created in any repo.
+commit and create pull request 
+commit message should contain issue id #issueid refer issueiD (adding algo as per #10) (commit relevant to a particular issue)
+only issue creator and repo owner can close an issue
+
+
+
+
+
+
+
+
+
+
+create and run virtual environment
+
+in any folder do:
+virtualenv . (to create virtual environment)
+cd Scripts
+activate.bat
+(do this in cmd not git bash)
+
+
+
+
+vim editor
+
+vim filename(opens editor)(creates if doesn't exists)
+i (insert into the editor)
+:q! (exit without saving)
+:wq
+
+
+
+
+compile cpp file using cmd
+g++ abc.cpp -o abc 
+then after the program compiles 
+./abc
+
+
+
+
+
+
+git request-pull v1.0(from when) [(link of the project)] master:for-linus (upto where you want to create pr)
+
+git remote -v
+origin  https://github.com/Your_Username/Algo_Ds_Notes.git (fetch)
+origin  https://github.com/Your_Username/Algo_Ds_Notes.git (push)
+
+
+git push origin --all  (pushes all branches)
+git push REMOTE --tags
+
+
+
+git remote add my-fork git@github...my-fork.git
+    git fetch my-fork
+    git push my-fork
+
+
+git remote rename origin destination (rename origin to destination)
+
+
+git remote add upstream https://github.com/jainaman224/Algo_Ds_Notes.git (add an upstream repo)
+git fetch upstream master 
+git push upstream master
+
+
+
+
+
+package installer apt-get choco yum sudo 
+
+
+
+
+rm -rf .git
+
+
+
+express commit 
+git commit -am commit " dfkdfj" don't use in other branches
+
+
+
+
+what is cherry pick  in git 
+
+
+
+
+
+cmd basic commands
+ls 
+cd 
+mkdir 
+mv
+command --help
+touch 
+rm
+
+
+
+commited files can't be added to gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
